@@ -4,9 +4,11 @@ Este proyecto contiene gran parte de las prácticas llevadas a cabo durante el
 tomado en [Escuela IT](https://escuela.it).
 
 ## Diseño de la solución
-Esta es la primera aproximación en la cual la definición de clases, y la asignación
-de sus correspondientes responsabilidades, se ha inspirado única y exclusivamente en
-el [modelo del dominio](docs/escuelait/Mastermind.pdf) y [requisitos](docs/escuelait/index.html)
-dados.
+Este es el segundo enfoque de la solución, con el cual se ha refinado el diseño
+separando la funcionalidad inherente a la presentación y captura de datos en clases
+de vistas.
+
+El [modelo del dominio](docs/escuelait/Mastermind.pdf) y los [requisitos](docs/escuelait/index.html)
+son los mismos que en la versión anterior.
 
 ![Diagrama de clases de diseño](docs/design-class-diagram.svg)

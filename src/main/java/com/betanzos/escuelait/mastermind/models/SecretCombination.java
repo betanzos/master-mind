@@ -1,4 +1,4 @@
-package com.betanzos.escuelait.mastermind;
+package com.betanzos.escuelait.mastermind.models;
 
 import java.util.Random;
 
@@ -15,15 +15,8 @@ public final class SecretCombination extends Combination {
         }
     }
 
-    @Override
-    public void print() {
-        Console console = new Console();
-        console.write("x".repeat(Combination.NUM_COLORS));
-        console.writeln();
-    }
-
-    public MatchResult match(ProposedCombination combination) {
-        assert combination != null && combination.isValid();
+    public MatchResult match(Combination combination) {
+        assert combination != null && combination.isComplete();
 
         int blacks = 0;
         int whites = 0;
@@ -38,5 +31,10 @@ public final class SecretCombination extends Combination {
         }
 
         return new MatchResult(blacks, whites);
+    }
+
+    @Override
+    public String toString() {
+        return "x".repeat(Combination.NUM_COLORS);
     }
 }

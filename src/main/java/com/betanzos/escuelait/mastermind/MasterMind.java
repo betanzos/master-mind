@@ -1,25 +1,17 @@
 package com.betanzos.escuelait.mastermind;
 
+import com.betanzos.escuelait.mastermind.views.MainView;
+
 public final class MasterMind {
 
-    public void play() {
-        do {
-            new Game().start();
-        } while (isResumed());
+    private MainView mainView;
 
-        Console console = new Console();
-        console.writeln();
-        console.writeln("GOOD BYE!!!");
+    private MasterMind() {
+        mainView = new MainView();
     }
 
-    private boolean isResumed() {
-        Console console = new Console();
-        String answer;
-        do {
-            answer = console.readString("RESUME? (y/n): ");
-        } while (!answer.equalsIgnoreCase("y") && !answer.equalsIgnoreCase("n"));
-
-        return answer.equalsIgnoreCase("y");
+    public void play() {
+        mainView.show();
     }
 
     public static void main(String[] args) {

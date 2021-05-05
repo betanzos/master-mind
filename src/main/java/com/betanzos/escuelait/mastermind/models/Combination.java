@@ -1,8 +1,8 @@
-package com.betanzos.escuelait.mastermind;
+package com.betanzos.escuelait.mastermind.models;
 
-public abstract class Combination {
+public class Combination {
 
-    protected final static int NUM_COLORS = 4;
+    public final static int NUM_COLORS = 4;
 
     private Color[] colors;
     private int lastColor;
@@ -12,9 +12,8 @@ public abstract class Combination {
         lastColor = -1;
     }
 
-    protected void addColor(Color color) {
+    public void addColor(Color color) {
         assert color != null;
-
         if (isComplete()) {
             return;
         }
@@ -22,16 +21,8 @@ public abstract class Combination {
         colors[++lastColor] = color;
     }
 
-    protected boolean isComplete() {
+    public boolean isComplete() {
         return lastColor == NUM_COLORS - 1;
-    }
-
-    public void print() {
-        StringBuilder sb = new StringBuilder();
-        for (var color : colors) {
-            sb.append(color.getSymbol());
-        }
-        new Console().write(sb.toString());
     }
 
     protected Color getColor(int i) {
@@ -48,5 +39,14 @@ public abstract class Combination {
         }
 
         return found;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (var color : colors) {
+            sb.append(color.getSymbol());
+        }
+        return sb.toString();
     }
 }

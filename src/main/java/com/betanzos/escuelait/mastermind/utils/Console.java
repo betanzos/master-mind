@@ -1,4 +1,4 @@
-package com.betanzos.escuelait.mastermind;
+package com.betanzos.escuelait.mastermind.utils;
 
 import java.util.Scanner;
 
@@ -15,14 +15,5 @@ public final class Console {
     public void writeln(String string) {
         assert string != null;
         System.out.println(string);
-    }
-
-    public void writeln() {
-        System.out.println();
-    }
-
-    public void write(String string) {
-        assert string != null;
-        System.out.print(string);
     }
 }

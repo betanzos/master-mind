@@ -1,4 +1,4 @@
-package com.betanzos.escuelait.mastermind;
+package com.betanzos.escuelait.mastermind.models;
 
 public enum Color {
     RED('r'),

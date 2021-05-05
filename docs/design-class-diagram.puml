@@ -1,0 +1,77 @@
+@startuml
+class MasterMind {
+    +play()
+}
+
+class Game {
+    +start()
+}
+
+abstract class Combination {
+    +print()
+}
+class SecretCombination {
+    +print()
+    +match(ProposedCombination): MatchResult
+}
+class ProposedCombination {
+    +read()
+    +isValid(): boolean
+}
+
+enum Color {
+    +RED
+    +BLUE
+    +YELLOW
+    +GREEN
+    +ORANGE
+    +PURPLE
+
+    +{static}parseSymbol(char): Color
+    +{static}getAllowedSymbolsString(): String
+    +getSymbol(): char
+}
+
+class Attempt {
+    +requestCombination()
+    +validateMatches(SecretCombination)
+    +hasFourBlack(): boolean
+    +print()
+}
+
+class MatchResult {
+    +getBlacks(): int
+    +print()
+}
+
+class Console {
+    +readString(String): String
+    +write(String)
+}
+
+
+MasterMind *--> "1..*" Game
+MasterMind ..> "use" Console
+
+Game *--> "1" SecretCombination
+Game *--> "1..10" Attempt
+Game ..> "use" Console
+
+Combination <|-- SecretCombination
+Combination <|-- ProposedCombination
+Combination o--> "4" Color
+Combination ..> "use" Console
+
+ProposedCombination ..> "use" Console
+
+SecretCombination ..> "return" MatchResult
+SecretCombination ..> "use" Console
+
+Attempt *--> "1" ProposedCombination
+Attempt o--> "1" MatchResult
+Attempt ..> "use" SecretCombination
+Attempt ..> "use" Console
+
+MatchResult ..> "use" Console
+
+@enduml

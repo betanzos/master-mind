@@ -1,23 +1,26 @@
 package com.betanzos.escuelait.mastermind.views;
 
-import com.betanzos.escuelait.mastermind.models.Game;
+public abstract class MainView {
 
-public final class MainView extends ConsoleView {
+    private GameView gameView;
+    private ResumeView resumeView;
+    private GoodbyeView goodbyeView;
 
-    public void show() {
-        do {
-            new GameView(new Game()).show();
-        } while (isResumed());
-
-        console.writeln("\nGOOD BYE!!!");
+    public MainView(GameView gameView, ResumeView resumeView, GoodbyeView goodbyeView) {
+        this.gameView = gameView;
+        this.resumeView = resumeView;
+        this.goodbyeView = goodbyeView;
     }
 
-    private boolean isResumed() {
-        String answer;
-        do {
-            answer = console.readString("RESUME? (y/n): ");
-        } while (!answer.equalsIgnoreCase("y") && !answer.equalsIgnoreCase("n"));
+    public void start() {
+        gameView.show();
+    }
 
-        return answer.equalsIgnoreCase("y");
+    public boolean resume() {
+        return resumeView.interact();
+    }
+
+    public void sayGoodBye() {
+        goodbyeView.show();
     }
 }

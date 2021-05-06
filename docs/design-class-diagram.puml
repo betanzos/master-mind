@@ -1,9 +1,17 @@
 @startuml
 namespace mastermind {
-    class MasterMind {
+    abstract class Mastermind {
         +play()
     }
-    MasterMind *--> views.MainView
+    Mastermind *--> views.MainView
+
+    class ConsoleMastermind extends Mastermind {
+        +{static} main(args: String[])
+    }
+
+    class GraphicMastermind extends Mastermind {
+        +{static} main(args: String[])
+    }
 }
 
 namespace models {
@@ -67,34 +75,70 @@ namespace types {
     }
 }
 
-namespace utils {
-    class Console {
-        +readString(String): String
-        +writeln(String)
+
+
+package views {
+    abstract class MainView {
+        +start()
+        +resume(): boolean
+        +sayGoodBye()
+    }
+    MainView *--> GameView
+    MainView *--> ResumeView
+    MainView *--> GoodbyeView
+
+    interface GameView {
+        +show()
+    }
+
+    interface ResumeView {
+        interact(): boolean
+    }
+
+    interface GoodbyeView
+
+    package console as v.c {
+        class ConsoleMainView extends views.MainView {
+            +show()
+            +isResumed(): boolean
+        }
+        ConsoleMainView --> ConsoleGameView
+        ConsoleMainView --> models.Game
+        ConsoleMainView <.. mastermind.ConsoleMastermind : instance
+        ConsoleMainView -->  ConsoleResumeView
+        ConsoleMainView --> ConsoleGoodbyeView
+
+        class ConsoleGameView implements views.GameView
+        ConsoleGameView *-right-> ConsoleProposedCombinationView
+        ConsoleGameView *--> models.Game
+
+        class ConsoleProposedCombinationView {
+            +getProposedCombination(): Combination
+        }
+        ConsoleProposedCombinationView ..> models.Combination : use and return
+        ConsoleProposedCombinationView ..> types.Color : use
+
+        class ConsoleResumeView implements views.ResumeView
+        class ConsoleGoodbyeView implements views.GoodbyeView
+    }
+
+
+    namespace graphic {
+        class GraphicMainView extends views.MainView
+        GraphicMainView <.up. mastermind.GraphicMastermind : instance
+        GraphicMainView --> GraphicGameView
+        GraphicMainView --> GraphicGoodbyeView
+        GraphicMainView --> GraphicResumeView
+
+        class GraphicGameView implements views.GameView
+        class GraphicGoodbyeView implements views.GoodbyeView
+        class GraphicResumeView implements views.ResumeView
     }
 }
+v.c .up.> utils.Console : use
 
-namespace views {
-    abstract class ConsoleView {
-    }
-    ConsoleView *--> utils.Console
-
-    class MainView extends ConsoleView {
-        +show()
-    }
-    MainView -right-> "1..*" GameView
-    MainView -down-> "1..*" models.Game
-
-    class GameView extends ConsoleView {
-        +show()
-    }
-    GameView *-right-> ProposedCombinationView
-    GameView *--> models.Game
-
-    class ProposedCombinationView extends ConsoleView {
-        +getProposedCombination(): Combination
-    }
-    ProposedCombinationView ..> models.Combination : use and return
-    ProposedCombinationView ..> types.Color : use
+class utils.Console {
+    +readString(String): String
+    +writeln(String)
 }
 @enduml

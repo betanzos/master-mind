@@ -1,14 +1,15 @@
-package com.betanzos.escuelait.mastermind.views;
+package com.betanzos.escuelait.mastermind.views.console;
 
 import com.betanzos.escuelait.mastermind.types.Color;
 import com.betanzos.escuelait.mastermind.models.Combination;
+import com.betanzos.escuelait.mastermind.utils.Console;
 
-public final class ProposedCombinationView extends ConsoleView {
+public final class ConsoleProposedCombinationView {
 
     public Combination getProposedCombination() {
         Combination combination = null;
         do {
-            String combinationStr = console.readString("Propose a combination: ");
+            String combinationStr = Console.IO.readString("Propose a combination: ");
 
             if (validateProposedCombinationLength(combinationStr)) {
                 combination = new Combination();
@@ -22,7 +23,7 @@ public final class ProposedCombinationView extends ConsoleView {
                 }
 
                 if (!combination.isComplete()) {
-                    console.writeln("Wrong colors, they must be: " + Color.getAllowedSymbolsString());
+                    Console.IO.writeln("Wrong colors, they must be: " + Color.getAllowedSymbolsString());
                 }
             }
         } while (combination == null || !combination.isComplete());
@@ -32,7 +33,7 @@ public final class ProposedCombinationView extends ConsoleView {
 
     private boolean validateProposedCombinationLength(final String combinationStr) {
         if (combinationStr.length() != Combination.NUM_COLORS) {
-            console.writeln("Wrong proposed combination length");
+            Console.IO.writeln("Wrong proposed combination length");
             return false;
         }
         return true;

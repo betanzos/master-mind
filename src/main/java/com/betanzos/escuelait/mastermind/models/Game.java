@@ -9,6 +9,10 @@ public final class Game {
     private int lastAttempt;
 
     public Game() {
+        init();
+    }
+
+    public void init() {
         secretCombination = new SecretCombination();
         attempts = new Attempt[MAX_ATTEMPTS];
         lastAttempt = -1;

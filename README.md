@@ -9,6 +9,7 @@ separando la funcionalidad inherente a la presentación y captura de datos en cl
 de vistas.
 
 El [modelo del dominio](docs/escuelait/Mastermind.pdf) y los [requisitos](docs/escuelait/index.html)
-son los mismos que en la versión anterior.
+son los mismos que en la versión anterior pero en esta versión se agrega el requisito
+de implementar una interfaz gráfica.
 
 ![Diagrama de clases de diseño](docs/design-class-diagram.svg)

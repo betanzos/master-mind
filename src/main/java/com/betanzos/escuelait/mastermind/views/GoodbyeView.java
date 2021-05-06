@@ -1,6 +1,6 @@
 package com.betanzos.escuelait.mastermind.views;
 
-public interface GameView {
+public interface GoodbyeView {
 
     void show();
 }

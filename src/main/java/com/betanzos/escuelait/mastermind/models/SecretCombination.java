@@ -1,5 +1,7 @@
 package com.betanzos.escuelait.mastermind.models;
 
+import com.betanzos.escuelait.mastermind.types.Color;
+
 import java.util.Random;
 
 public final class SecretCombination extends Combination {

@@ -1,5 +1,7 @@
 package com.betanzos.escuelait.mastermind.models;
 
+import com.betanzos.escuelait.mastermind.types.Color;
+
 public class Combination {
 
     public final static int NUM_COLORS = 4;

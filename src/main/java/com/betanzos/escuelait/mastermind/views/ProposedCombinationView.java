@@ -1,6 +1,6 @@
 package com.betanzos.escuelait.mastermind.views;
 
-import com.betanzos.escuelait.mastermind.models.Color;
+import com.betanzos.escuelait.mastermind.types.Color;
 import com.betanzos.escuelait.mastermind.models.Combination;
 
 public final class ProposedCombinationView extends ConsoleView {

@@ -24,28 +24,16 @@ namespace models {
         +isComplete(): boolean
         +toString(): String
     }
-    Combination o--> "4" Color
+    Combination o--> "4" types.Color
 
-    class SecretCombination extends Combination {
+    class SecretCombination {
         +match(Combination): MatchResult
         +toString(): String
     }
     SecretCombination ..> Combination : use
     SecretCombination ..> MatchResult : return
-    SecretCombination ..> Color : use
-
-    enum Color {
-        +RED
-        +BLUE
-        +YELLOW
-        +GREEN
-        +ORANGE
-        +PURPLE
-
-        +{static}parseSymbol(char): Color
-        +{static}getAllowedSymbolsString(): String
-        +getSymbol(): char
-    }
+    SecretCombination ..> types.Color : use
+    SecretCombination -up-|> Combination
 
     class Attempt {
         +validateMatches(SecretCombination)
@@ -61,6 +49,21 @@ namespace models {
         +whites: int
         +hasFourBlack(): boolean
         +toString(): String
+    }
+}
+
+namespace types {
+    enum Color {
+        +RED
+        +BLUE
+        +YELLOW
+        +GREEN
+        +ORANGE
+        +PURPLE
+
+        +{static}parseSymbol(char): Color
+        +{static}getAllowedSymbolsString(): String
+        +getSymbol(): char
     }
 }
 
@@ -92,6 +95,6 @@ namespace views {
         +getProposedCombination(): Combination
     }
     ProposedCombinationView ..> models.Combination : use and return
-    ProposedCombinationView ..> models.Color : use
+    ProposedCombinationView ..> types.Color : use
 }
 @enduml

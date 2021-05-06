@@ -37,8 +37,7 @@ public final class Game {
     }
 
     public void recordAttempt(Combination proposedCombination) {
-        Attempt attempt = new Attempt(proposedCombination);
+        Attempt attempt = new Attempt(proposedCombination, secretCombination);
         attempts[++lastAttempt] = attempt;
-        attempt.validateMatches(secretCombination);
     }
 }

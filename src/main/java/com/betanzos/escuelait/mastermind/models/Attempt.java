@@ -5,13 +5,9 @@ public final class Attempt {
     private Combination combination;
     private MatchResult matchResult;
 
-    public Attempt(Combination combination) {
+    public Attempt(Combination combination, SecretCombination secretCombination) {
         assert combination != null && combination.isComplete();
         this.combination = combination;
-    }
-
-    public void validateMatches(SecretCombination secretCombination) {
-        assert combination.isComplete();
         matchResult = secretCombination.match(combination);
     }
 
